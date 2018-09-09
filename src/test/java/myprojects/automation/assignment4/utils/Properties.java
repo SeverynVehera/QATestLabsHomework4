@@ -1,5 +1,6 @@
 package myprojects.automation.assignment4.utils;
 
+
 /**
  * Help class to get passed parameters from environment for further usage in the automation project
  */
@@ -22,6 +23,7 @@ public class Properties {
     public static String getBaseAdminUrl() {
         return System.getProperty(EnvironmentVariables.BASE_ADMIN_URL.toString(), DEFAULT_BASE_ADMIN_URL);
     }
+
 
 }
 

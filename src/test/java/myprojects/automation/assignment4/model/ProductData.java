@@ -12,6 +12,8 @@ public class ProductData {
     private int qty;
     private float price;
 
+    private static ProductData lastGeneratedProduct;
+
     public ProductData(String name, int qty, float price) {
         this.name = name;
         this.qty = qty;
@@ -37,9 +39,19 @@ public class ProductData {
      */
     public static ProductData generate() {
         Random random = new Random();
-        return new ProductData(
+        lastGeneratedProduct = new ProductData(
                 "New Product " + System.currentTimeMillis(),
                 random.nextInt(100) + 1,
                 (float) Math.round(random.nextInt(100_00) + 1) / 100);
+        return lastGeneratedProduct;
+    }
+
+    public static ProductData getLastGeneratedProduct(){
+        return lastGeneratedProduct;
+    }
+
+    @Override
+    public String toString() {
+        return name+" qty: " + qty+ " price: "+ price;
     }
 }

@@ -8,6 +8,24 @@
     <artifactId>assignment4</artifactId>
     <version>1.0</version>
 
+    <properties>
+        <!-- - - - - - Encoding - - - - - -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- - - - - - Browser Type - - - - - -->
+        <test.browser.type>chrome</test.browser.type>
+        <!--<test.browser.type>ie</test.browser.type>-->
+        <!--<test.browser.type>firefox</test.browser.type>-->
+
+        <!-- - - - - - Java - - - - - -->
+        <jdk.source.version>1.8</jdk.source.version>
+        <jdk.compiler.version>1.8</jdk.compiler.version>
+    </properties>
+    <repositories>
+        <repository>
+            <id>java-net</id>
+            <url>http://download.java.net/maven/2</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
@@ -15,8 +33,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>9</source>
-                    <target>9</target>
+                    <source>${jdk.source.version}</source>
+                    <target>${jdk.compiler.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
 
@@ -26,6 +45,20 @@
                 <version>2.20.1</version>
                 <configuration>
                     <!--ReportNG reporting framework may be connected here-->
+                    <properties>
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>false</value>
+                        </property>
+                        <property>
+                            <name>listener</name>
+                            <value>org.uncommons.reportng.HTMLReporter, org.uncommons.reportng.JUnitXMLReporter</value>
+                        </property>
+                    </properties>
+                    <workingDirectory>target/</workingDirectory>
+                    <systemPropertyVariables>
+                        <browser>${test.browser.type}</browser>
+                    </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>${project.build.testOutputDirectory}/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
@@ -64,6 +97,7 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>4.1.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
